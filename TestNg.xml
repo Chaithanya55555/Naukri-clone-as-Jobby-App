@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="JobbyAppTest" parallel="classes" thread-count="2">
+    <test name="Functionality" >
+        <classes>
+            <class name="org.example.LoginPageTest" ></class>
+            <class name="org.example.HeaderSectionTest"></class>
+            <class name="org.example.HomePageTest"></class>
+            <class name="org.example.JobsPageTest"></class>
+            <class name="org.example.logout"></class>
+        </classes>
+    </test>
+</suite>
