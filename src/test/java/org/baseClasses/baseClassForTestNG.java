@@ -50,7 +50,12 @@ public class baseClassForTestNG {
         p.load(file);
         logger = LogManager.getLogger(this.getClass());
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--headless",
+                "--disable-gpu",
+                "--disable-extensions",
+                "--disable-background-services",
+                "--blink-settings=imagesEnabled=false",
+                "--no-sandbox");
         EdgeOptions edgeOptions = new EdgeOptions();
         edgeOptions.addArguments("--headless");
         System.out.println(br + os);
