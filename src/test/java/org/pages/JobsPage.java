@@ -33,7 +33,7 @@ public class JobsPage {
 
     // Assuming each job listing element has a common class name (adjust if needed)
     @FindBy(how = How.CLASS_NAME, using = "link-item")
-    private List<WebElement> allJobsDisplayed;
+    public List<WebElement> allJobsDisplayed;
 
     // Assuming the "No jobs found" image has a unique ID (adjust if needed)
     @FindBy(how = How.CLASS_NAME, using = "jobs-not-found-img")
@@ -41,7 +41,7 @@ public class JobsPage {
 
     // Assuming the "No jobs found" heading has a class name (adjust if needed)
     @FindBy(how = How.CLASS_NAME, using = "jobs-not-found-heading")
-    private WebElement noJobsFoundHeading;
+     WebElement noJobsFoundHeading;
 
     // Assuming the "No jobs found" description has a CSS selector (adjust if needed)
     @FindBy(how = How.CSS, using =".jobs-not-found-description")

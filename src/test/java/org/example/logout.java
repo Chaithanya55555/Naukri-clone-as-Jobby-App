@@ -1,6 +1,7 @@
 package org.example;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.baseClasses.baseClassForTestNG;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,27 +16,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class logout {
-     WebDriver driver;
-     LoginPage loginPage;
-     WebDriverWait wait;
-     HomePage homePage;
-
-
-    @BeforeMethod
-    public void setUp(){
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        loginPage = new LoginPage(driver);
-        homePage = new HomePage(driver);
-        driver.get("https://qajobbyapp.ccbp.tech/login");
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-    }
-    @AfterMethod
-    public void tearDown(){
-        driver.quit();
-    }
+public class logout extends baseClassForTestNG {
 
     @Test(priority = 1)
     public void logOutFunctionality(){

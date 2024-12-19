@@ -1,24 +1,19 @@
 package org.example;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
+import org.baseClasses.baseClassForTestNG;
+import org.openqa.selenium.By;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.pages.HomePage;
-import org.pages.JobsPage;
-import org.pages.LoginPage;
+
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.time.Duration;
 
-public class JobsPageTest {
-    public WebDriver driver;
-    public LoginPage loginPage;
-    public JobsPage jobsPage;
-    public HomePage homePage;
-    public WebDriverWait wait;
+public class JobsPageTest extends baseClassForTestNG {
+
     @DataProvider(name = "data")
     public Object[][] dataDetails(){
         Object[][] data = {
@@ -31,20 +26,7 @@ public class JobsPageTest {
         };
         return data;
     }
-    @BeforeMethod
-    public void setUp(){
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        loginPage = new LoginPage(driver);
-        jobsPage =new JobsPage(driver);
-        homePage = new HomePage(driver);
-        driver.get("https://qajobbyapp.ccbp.tech/login");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-    }
-    @AfterMethod
-    public void tearDown(){
-        driver.quit();
-    }
+
     @Test(priority = 1)
     public void profileUI(){
         loginPage.login("rahul","rahul@2021");
@@ -80,6 +62,7 @@ public class JobsPageTest {
         homePage.clickFindJobsButton();
         jobsPage.enterSearchText("Netflix");
         jobsPage.clickSearchButton();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("jobs-not-found-heading")));
         Assert.assertTrue(jobsPage.isNoJobsFoundImageDisplayed(),"Jobs not found heading does not match");
         Assert.assertEquals(jobsPage.getNoJobsFoundHeadingText(),"No Jobs Found","Jobs not found heading does not match");
         Assert.assertEquals(jobsPage.getNoJobsFoundDescriptionText(),"We could not find any jobs. Try other filters.","Jobs not found description does not match");

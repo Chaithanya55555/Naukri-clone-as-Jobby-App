@@ -1,35 +1,18 @@
 package org.example;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.baseClasses.baseClassForTestNG;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.pages.LoginPage;
+
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class LoginPageTest {
-    public WebDriver driver;
-    public LoginPage loginPage;
-    public WebDriverWait wait;
-    @BeforeMethod
-    public void setUp(){
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        loginPage = new LoginPage(driver);
-        driver.get("https://qajobbyapp.ccbp.tech/login");
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-    }
-    @AfterMethod
-    public void tearDown(){
-        driver.quit();
-    }
+public class LoginPageTest extends baseClassForTestNG {
+
     @Test(priority = 1)
     public void loginPageUI(){
         Assert.assertTrue(loginPage.isAppLogoDisplayed(),"App logo is not displayed");
@@ -43,13 +26,13 @@ public class LoginPageTest {
     }
     @Test(priority = 3)
     public void emptyUsername(){
-        loginPage.enterPassword("rahul@2021");
+        loginPage.enterPassword(p.getProperty("password"));
         loginPage.clickLoginButton();
         Assert.assertEquals(loginPage.getErrorMessageText(),"*Username or password is invalid","*Username or password is invalid");
     }
     @Test(priority =  4)
     public void emptyPassword(){
-        loginPage.enterUsername("rahul");
+        loginPage.enterUsername(p.getProperty("username"));
         loginPage.clickLoginButton();
         Assert.assertEquals(loginPage.getErrorMessageText(),"*Username or password is invalid","Error text with empty input field do not match");
     }
@@ -61,7 +44,7 @@ public class LoginPageTest {
     }
     @Test(priority = 6)
     public void successfulLogin(){
-        loginPage.login("rahul","rahul@2021");
+        loginPage.login(p.getProperty("username"),p.getProperty("password"));
         loginPage.clickLoginButton();
         String expectedUrl = "https://qajobbyapp.ccbp.tech/";
         wait = new WebDriverWait(driver,Duration.ofSeconds(5));

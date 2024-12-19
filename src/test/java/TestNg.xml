@@ -1,0 +1,19 @@
+
+<suite name="JobbyAppTest" >
+    <listeners>
+        <listener class-name="org.baseUtilities.extraExtentReports"></listener>
+   </listeners>
+    <test name="TestNg" >
+        <parameter name="os" value="linux"></parameter>
+        <parameter name="br" value="chrome"></parameter>
+              <classes >
+            <!-- <class name="org.example.LoginPageTest" ></class>
+             <class name="org.example.HeaderSectionTest"></class>
+             <class name="org.example.HomePageTest"></class>
+
+                  <class name="org.example.logout"></class>-->
+
+                  <class name="org.example.JobsPageTest"></class>
+             </classes>
+    </test>
+</suite>
